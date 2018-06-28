@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Brian B. Soltis">
+  <meta name="description" content="Simple pomodoro timer.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Timer</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:200,400" rel="stylesheet">
+</head>
+
+<body>
+  
+  <audio id="ding" preload="auto"> 
+    <source src="../ding.m4a">
+    </audio>
+    
+    <div class="main-container">
+    
+    <div class="header-wrapper"><header>Pomodoro Timer</header></div>
+
+    <div class="timer-body">
+      <button class="increment-btn disabled-btn btn" data-tooltip="Increase timer setting">▲</button>
+      <button class="sb-toggle-btn btn" id="sb-btn" data-tooltip="Session/ break! toggle"></button>
+      <button class="defaults-btn disabled-btn btn" data-tooltip="Restore default settings">Default</button>
+      <button class="decrement-btn disabled-btn btn" data-tooltip="Decrease timer setting">▼</button>
+      <div class="display-wrapper">
+        <div class="display-screen" id="display"></div>
+      </div>
+      <button class="start-stop-btn btn" id="start-btn" data-tooltip="Start/ stop timer"></button>
+      <button class="reset-btn btn" data-tooltip="Reset timer">Reset</button>
+    </div>
+
+    <div class="timer-body-shadow"></div>
+
+  <!-- end .main-container -->
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

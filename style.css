@@ -1,0 +1,270 @@
+/* =================================================
+*  Table of Contents
+*  1.0 Variables
+*  2.0 Containers
+*  3.0 Header
+*  4.0 Buttons
+*    4.1 Custom Tooltips
+*  5.0 Digital Display
+*  ================================================= */
+
+@font-face {
+  font-family: 'digital';
+  src: url('digital-7.ttf') format('truetype')
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 62.5%;
+}
+
+body {
+  background: #f9f9f9;
+}
+
+/* =======================================
+*  1.0 Variables
+*  ======================================= */
+:root {
+  --dsp-font-color: black;
+  --dsp-font-size: 8.8rem;
+  --dsp-font-fam: 'digital';
+  --btn-font-fam: 'Montserrat', sans-serif;
+  --btn-font-color: black;
+  --btn-active-color: #cbffc4;
+}
+
+/* =======================================
+*  2.0 Containers
+*  ======================================= */
+.main-container {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.timer-body {
+  display: grid;
+  grid-template-rows: 65px 65px 90px 140px;
+  grid-template-columns: 140px repeat(2, 40px) 140px;
+  justify-content: center;
+  align-content: center;
+  grid-gap: 5px;
+  height: 400px;
+  width: 400px;
+  background-color: tomato;
+  background: radial-gradient(tomato 50px, #6b0000);
+  border-radius: 50%;
+  box-shadow: 0 50px 100px -10px rgba(0,0,0,0.7);
+}
+
+/* =======================================
+*  3.0 Header
+*  ======================================= */
+header {
+  font-size: 6rem;
+  font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  color: #444;
+  background: #cbffc4;
+  padding: 20px 40px;
+  border: 12px solid white;
+}
+
+.header-wrapper {
+  position: relative;
+}
+
+.header-wrapper::before, .header-wrapper::after {
+  content: '';
+  z-index: -1;
+  width: 200px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  top: 80%;
+  box-shadow: 0 10px 15px #777;
+  z-index: -1;
+  transform: rotate(-5deg);
+}
+
+.header-wrapper::after {
+  transform: rotate(5deg);
+  left: auto;
+  right: 10px;
+}
+
+/* =======================================
+*  4.0 Buttons
+*  ======================================= */
+.btn {
+  font-family: var(--btn-font-fam);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.7);
+  border: none;
+  outline: none;
+  background: #cbffc4;
+}
+
+.btn:active {
+  box-shadow: 0 0 20px #cbffc4;
+}
+
+.increment-btn {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 2;
+  clip-path: circle(180px at 131.5% 136%);
+  padding: 45px 0 0 45px ;
+}
+
+.increment-btn:active {
+  background: radial-gradient(at 92px 90px,white, var(--btn-active-color), var(--btn-active-color));
+}
+
+.decrement-btn {
+  grid-column: 4 / span 1;
+  grid-row: 1 / span 2;
+  clip-path: circle(180px at -31% 136%);
+  padding: 45px 45px 0 0;
+}
+
+.decrement-btn:active {
+  background: radial-gradient(at 46px 90px, white, var(--btn-active-color), var(--btn-active-color));
+}
+
+.increment-btn, .decrement-btn {
+  height: 100%;
+  width: 100%;
+  font-size: 2.5rem;
+}
+
+.sb-toggle-btn {
+  grid-column: 2 / span 2;
+  grid-row: 1 / span 1;
+  height: 100%;
+  width: 100%;
+  clip-path: circle(180px at 50% 280%);
+  padding-top: 6px;
+}
+
+.defaults-btn {
+  grid-column: 2/ span 2;
+  grid-row: 2 / span 1;
+  height: 100%;
+  width: 100%;
+}
+
+.defaults-btn:active, .sb-toggle-btn:active {
+  background: radial-gradient(white, var(--btn-active-color), var(--btn-active-color));
+}
+
+.start-stop-btn {
+  grid-column: 1 / span 2;
+  grid-row: 4 / span 1;
+  clip-path: circle(186px at 102% -34%);
+  padding: 0 0 30px 45px;
+}
+
+.start-stop-btn:active {
+  background: radial-gradient(at 112px 54px, white, var(--btn-active-color), var(--btn-active-color));
+}
+
+.reset-btn {
+  grid-column: 3 / span 2;
+  grid-row: 4 / span 1;
+  clip-path: circle(186px at -1.5% -34%);
+  padding: 0 45px 30px 0;
+}
+
+.reset-btn:active{
+  background: radial-gradient(at 72px 54px, white, var(--btn-active-color), var(--btn-active-color));
+}
+
+.start-stop-btn, .reset-btn {
+  height: 100%;
+  width: 100%;
+  font-size: 2.5rem;
+}
+
+/* -----------------------------
+*  4.1 Custom Tooltips
+*  ----------------------------- */
+button[data-tooltip] {
+  display: inline-block;
+  position: relative;
+}
+
+button[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  font-family: var(--dsp-font-fam);
+  text-align: left;
+  font-size: 2.1rem;
+  width: 75px;
+  padding: 10px;
+  transition: all ease-in-out 150ms;
+  transition-delay: .6s;
+  opacity: 0;
+}
+
+.increment-btn[data-tooltip]::after {
+  top: 148px;
+  left: 10px;
+}
+
+.decrement-btn[data-tooltip]::after {
+  top: 148px;
+  left: -225px;
+}
+
+.defaults-btn[data-tooltip]::after {
+  top: 78px;
+  left: -135px;
+}
+
+.sb-toggle-btn[data-tooltip]::after {
+  top: 148px;
+  left: -135px;
+}
+
+.start-stop-btn[data-tooltip]::after {
+  top: -87px;
+  left: 9px;
+}
+
+.reset-btn[data-tooltip]::after {
+  top: -87px;
+  left: -180px;
+}
+
+button[data-tooltip]:hover::after {
+  opacity: 1;
+}
+
+/* =======================================
+*  5.0 Digital Display
+*  ======================================= */
+.display-wrapper {
+  display: grid;
+  justify-items: center;
+  align-items: end; 
+  grid-column: 1 / -1;
+  grid-row: 3 / span 1;
+  place-self: center;
+  width: 370px;
+  height: 100%;
+  border-radius: 20px/90px;
+  background:   #D3E1D3;
+  box-shadow: inset 0 0 4px rgba(0,0,0,.8);
+}
+
+.display-screen {
+  /* Font Styling */
+  color: var(--dsp-font-color);
+  font-family: var(--dsp-font-fam);
+  font-size: var(--dsp-font-size);
+}
